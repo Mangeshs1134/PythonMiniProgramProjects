@@ -16,8 +16,11 @@ def save_data_helper(videos):
 
 def list_all_videos(videos):
     for index , video in enumerate(videos , start=1):
-        print(f"{index}. {video['name']} - {video['duration']}")
-
+        print("*"*50)
+        print(f"\n{index}. {video['name']} - {video['duration']}\n")
+        print("*"*50)
+    if len(videos)==0:
+        print("nothing to show --")
 def add_video(videos):
     name = input("\nEnter Video Name : ")
     duration = input("\nEnter Video Duration : ")
@@ -26,7 +29,7 @@ def add_video(videos):
 
 def update_video(videos):
     # print(videos)
-    index = int(input("Index of Video"))
+    index = int(input("\nIndex of Video To Update: "))
     if len(videos) > index > 0 :
          name = input("\nEnter Video Name : ")
          duration = input("\nEnter Video Duration : ")
@@ -35,11 +38,12 @@ def update_video(videos):
          save_data_helper(videos)
 
 def delete_video(videos):
-    index = int(input("Index of Video"))
-    if len(videos) > index > 0 :
+    index = int(input("\nIndex of Video to Delete: "))
+    if len(videos) >= index > 0 :
         videos.pop(index-1)
         save_data_helper(videos)
-
+    else:
+        print("ok")
 def main():
     videos = loadData()
     # print(videos)
@@ -52,7 +56,7 @@ def main():
         print("\n 5. Exit the App")
         #User Input
         choice = input("\nEnter Your Wish : ")
-        print(videos)
+        # print(videos)
 
         match choice :
             case "1" : 
@@ -64,6 +68,7 @@ def main():
             case "4" :
                 delete_video(videos)
             case "5" :
+                print("Thank You")
                 break
             case _ :
                 print("invalid CHOICE")
